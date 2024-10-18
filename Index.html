@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exibir Apenas Palavras entre Dois Asteriscos</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #2c3e50;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            resize: none;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            border-color: #2980b9;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            border: 2px solid #bdc3c7;
+            min-height: 50px;
+            font-size: 18px;
+            text-align: center;
+            color: #34495e;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 12px;
+            }
+
+            .output {
+                font-size: 16px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            textarea {
+                height: 120px;
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .output {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+  
+
+<div class="container">
+    <h1>Filtrar Palavras entre Asteriscos</h1>
+
+    <textarea id="inputText" placeholder="Digite ou cole seu texto aqui..."></textarea>
+    <button onclick="filterWords()">Exibir Palavras com Dois Asteriscos</button>
+
+    <div class="output" id="output"></div>
+</div>
+
+<script>
+    function filterWords() {
+        // Obter o texto do textarea
+        const text = document.getElementById("inputText").value;
+
+        // Expressão regular para capturar apenas o que está entre dois asteriscos duplos (**)
+        const matches = text.match(/\*\*([^*]+)\*\*/g);
+
+        // Se encontrar palavras entre dois asteriscos, exibir. Caso contrário, exibir mensagem de "nenhuma palavra encontrada"
+        const result = matches ? matches.map(word => word.replace(/\*\*/g, '')).join(', ') : 'Nenhuma palavra entre asteriscos duplos encontrada.';
+
+        // Exibir as palavras encontradas na div de saída
+        document.getElementById("output").innerText = result;
+    }
+</script>
+
+</body>
+</html>
